@@ -1,49 +1,227 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#7c3f00">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Mosquées">
-    <meta name="description" content="Trouvez les mosquées à proximité de votre position actuelle">
+    <meta name="apple-mobile-web-app-title" content="Mosquées / المساجد">
+    <meta name="description" content="Trouvez les mosquées à proximité - ابحث عن المساجد القريبة">
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
-    <title>Mosquées Proximité</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Mosquées - المساجد</title>
     <link rel="manifest" href="manifest.json">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            background-color: #7c3f00;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .language-picker {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            padding: 2rem;
+            text-align: center;
+            border: 2px solid #7c3f00;
+        }
+        
+        h1 {
+            margin-bottom: 0.5rem;
+        }
+        
+        h2 {
+            color: #7c3f00;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        .lang-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            border-radius: 8px;
+            background-color: #7c3f00;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .lang-btn:hover, .lang-btn:focus {
+            background-color: #5e3000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .lang-btn:active {
+            transform: translateY(0);
+        }
+        
+        .lang-btn .flag {
+            margin-right: 10px;
+            width: 24px;
+            height: 24px;
+        }
+        
+        .ar-btn {
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .mosque-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem auto;
+        }
+        
+        .app-info {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+        }
+        
+        /* Mode sombre pour les appareils qui le supportent */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #222;
+                color: #f0f0f0;
+            }
+            
+            .language-picker {
+                background-color: #333;
+                border-color: #7c3f00;
+            }
+            
+            .app-info {
+                color: #aaa;
+            }
+            
+            h2 {
+                color: #d9984a;
+            }
+        }
+        
+        /* Adaptation pour les petits écrans */
+        @media (max-width: 480px) {
+            .language-picker {
+                padding: 1.5rem;
+                width: 90%;
+            }
+            
+            h2 {
+                font-size: 1.3rem;
+            }
+            
+            .mosque-icon {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Mosquées à proximité</h1>
+        <h1>Mosquées à proximité / المساجد القريبة</h1>
     </header>
-
+    
     <div class="container">
-        <div class="status-container">
-            <div id="status">Chargement de votre position...</div>
-            <button id="refresh-btn" onclick="refreshLocation()">Actualiser la position</button>
-        </div>
-        <div id="map"></div>
-        <div id="mosque-list">
-            <h2>Mosquées trouvées</h2>
-            <ul id="mosques"></ul>
+        <div class="language-picker">
+            <svg class="mosque-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="60" height="60">
+                <path d="M256 32C135.1 32 36.1 127.9 32.2 248c-.2 6.6 5.1 12 11.7 12h39.3c5.8 0 10.5-4.3 11.4-10 14.1-93.7 93.1-166 190.6-166 106 0 192 86 192 192s-86 192-192 192c-97.5 0-176.5-72.3-190.6-166-1-5.7-5.6-10-11.4-10H32.9c-6.6 0-11.9 5.4-11.7 12C25.9 384.1 124.9 480 245.8 480h10.2C379.5 480 480 379.5 480 256S379.5 32 256 32z" fill="#7c3f00"/>
+            </svg>
+            
+            <h2>Choisissez votre langue / اختر لغتك</h2>
+            
+            <div class="btn-container">
+                <a href="index_fr.html" class="lang-btn">
+                    <span class="flag">🇫🇷</span> Français
+                </a>
+                <a href="index_ar.html" class="lang-btn ar-btn">
+                    <span class="flag">🇸🇦</span> العربية
+                </a>
+            </div>
+            
+            <div class="app-info">
+                <p>Vous pourrez changer de langue à tout moment</p>
+                <p>يمكنك تغيير اللغة في أي وقت</p>
+            </div>
         </div>
     </div>
-
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="enhanced-popups.js"></script>
-    <script src="mobile-detector.js" defer></script>
-    <script src="app.js"></script>
-    <script src="pwa.js" defer></script>
     
     <script>
-        // Enregistrement du Service Worker pour la PWA
+        // Enregistrer le Service Worker
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('service-worker.js')
                 .then(reg => console.log('Service Worker enregistré', reg))
                 .catch(err => console.error('Erreur Service Worker:', err));
         }
+        
+        // Sauvegarder le choix de langue
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const lang = this.classList.contains('ar-btn') ? 'ar' : 'fr';
+                localStorage.setItem('preferred_language', lang);
+            });
+        });
+        
+        // Vérifier si l'utilisateur a déjà choisi une langue
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferred_language');
+            if (savedLang) {
+                // Rediriger automatiquement si une préférence existe déjà
+                window.location.href = savedLang === 'ar' ? 'index_ar.html' : 'index_fr.html';
+            }
+        });
     </script>
 </body>
 </html>

@@ -1,29 +1,25 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#7c3f00">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="المساجد">
-    <meta name="description" content="ابحث عن المساجد القريبة من موقعك الحالي">
+    <meta name="apple-mobile-web-app-title" content="Mosquées">
+    <meta name="description" content="Trouvez les mosquées à proximité de votre position actuelle">
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <title>المساجد القريبة</title>
+    <title>Mosquées Proximité</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="rtl-style.css">
-    <link rel="manifest" href="manifest_ar.json">
+    <link rel="manifest" href="manifest.json">
     
-    <!-- إضافة زر تغيير اللغة -->
+    <!-- Ajout d'un bouton de changement de langue -->
     <style>
         .language-switch {
             position: absolute;
             top: 10px;
-            right: 10px;
+            left: 10px;
             z-index: 1000;
             background-color: white;
             border: 1px solid #7c3f00;
@@ -36,7 +32,6 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
             display: flex;
             align-items: center;
-            font-family: Arial, sans-serif;
         }
 
         .language-switch:hover {
@@ -44,7 +39,7 @@
         }
 
         .language-switch span {
-            margin-left: 5px;
+            margin-right: 5px;
         }
 
         @media (max-width: 480px) {
@@ -58,36 +53,36 @@
 </head>
 <body>
     <header>
-        <h1>المساجد القريبة</h1>
-        <a href="index_fr.html" class="language-switch" onclick="localStorage.setItem('preferred_language', 'fr');">
-            Français <span>🇫🇷</span>
+        <h1>Mosquées à proximité</h1>
+        <a href="index_ar.html" class="language-switch" onclick="localStorage.setItem('preferred_language', 'ar');">
+            <span>🇸🇦</span> العربية
         </a>
     </header>
 
     <div class="container">
         <div class="status-container">
-            <div id="status">جاري تحميل موقعك...</div>
-            <button id="refresh-btn" onclick="refreshLocation()">تحديث الموقع</button>
+            <div id="status">Chargement de votre position...</div>
+            <button id="refresh-btn" onclick="refreshLocation()">Actualiser la position</button>
         </div>
         <div id="map"></div>
         <div id="mosque-list">
-            <h2>المساجد التي تم العثور عليها</h2>
+            <h2>Mosquées trouvées</h2>
             <ul id="mosques"></ul>
         </div>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="enhanced-popups_ar.js"></script>
+    <script src="enhanced-popups.js"></script>
     <script src="mobile-detector.js" defer></script>
-    <script src="app_ar.js"></script>
+    <script src="app.js"></script>
     <script src="pwa.js" defer></script>
     
     <script>
-        // تسجيل Service Worker للتطبيق
+        // Enregistrement du Service Worker pour la PWA
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('service-worker.js')
-                .then(reg => console.log('تم تسجيل Service Worker', reg))
-                .catch(err => console.error('خطأ في Service Worker:', err));
+                .then(reg => console.log('Service Worker enregistré', reg))
+                .catch(err => console.error('Erreur Service Worker:', err));
         }
     </script>
 </body>

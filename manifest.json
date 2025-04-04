@@ -1,7 +1,7 @@
 {
-  "name": "Mosquées à Proximité",
-  "short_name": "Mosquées",
-  "description": "Application pour trouver les mosquées à proximité de votre position",
+  "name": "Mosquées à Proximité / المساجد القريبة",
+  "short_name": "Mosquées / المساجد",
+  "description": "Application pour trouver les mosquées à proximité de votre position - تطبيق للعثور على المساجد القريبة من موقعك",
   "start_url": "index.html",
   "display": "standalone",
   "orientation": "portrait",
