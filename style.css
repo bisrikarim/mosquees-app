@@ -1,0 +1,459 @@
+/* Animations pour les marqueurs */
+@keyframes markerAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.marker-appear {
+    animation: markerAppear 0.5s ease-out forwards;
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 10px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid #7c3f00 !important;
+    padding: 5px !important;
+}
+
+.leaflet-popup-content {
+    margin: 10px 14px !important;
+}
+
+.leaflet-popup-tip {
+    background-color: #7c3f00 !important;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2) !important;
+}* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+header {
+    background-color: #7c3f00;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.status-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+#status {
+    background-color: #f0f0f0;
+    padding: 0.8rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    flex-grow: 1;
+    margin-right: 1rem;
+    border: 1px solid #ddd;
+}
+
+#refresh-btn {
+    background-color: #7c3f00;
+    color: white;
+    border: none;
+    padding: 0.8rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+#refresh-btn:hover {
+    background-color: #5e3000;
+}
+
+#map {
+    height: 400px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin-bottom: 1.5rem;
+    border: 2px solid #7c3f00;
+    overflow: hidden;
+}
+
+#mosque-list {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 2px solid #7c3f00;
+}
+
+#mosque-list h2 {
+    color: #7c3f00;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+#mosques {
+    list-style: none;
+}
+
+#mosques li {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+#mosques li:hover {
+    background-color: #f9f3ee;
+}
+
+#mosques li:last-child {
+    border-bottom: none;
+}
+
+.mosque-info {
+    display: flex;
+    align-items: center;
+}
+
+.mosque-icon-small {
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    padding: 0.4rem;
+    margin-right: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mosque-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.mosque-name {
+    font-weight: bold;
+}
+
+.mosque-distance {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.mosque-btn {
+    background-color: #7c3f00;
+    color: white;
+    border: none;
+    padding: 0.5rem 0.8rem;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.mosque-btn:hover {
+    background-color: #5e3000;
+}
+
+.mosque-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.mosque-directions {
+    background-color: #7c3f00;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mosque-directions:hover {
+    background-color: #5e3000;
+}
+
+@media (max-width: 768px) {
+    #map {
+        height: 300px;
+    }
+    
+    .status-container {
+        flex-direction: column;
+    }
+    
+    #status {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+        width: 100%;
+    }
+    
+    #refresh-btn {
+        width: 100%;
+    }
+    
+    #mosque-list h2 {
+        font-size: 1.2rem;
+    }
+    
+    .mosque-name {
+        font-size: 0.9rem;
+    }
+    
+    .mosque-distance {
+        font-size: 0.8rem;
+    }
+    
+    .mosque-btn {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.7rem;
+    }
+    
+    header {
+        padding: 0.7rem;
+    }
+    
+    header h1 {
+        font-size: 1.3rem;
+    }
+    
+    .container {
+        padding: 0.5rem;
+    }
+    
+    #mosque-list {
+        padding: 0.7rem;
+    }
+    
+    /* Amélioration de la taille des zones cliquables sur mobile */
+    .mosque-btn {
+        min-height: 36px;
+        min-width: 60px;
+    }
+    
+    /* Espacement des éléments de la liste pour plus de facilité de clic */
+    #mosques li {
+        padding: 0.9rem 0.6rem;
+        margin-bottom: 0.3rem;
+    }
+}
+
+.loading {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.6;
+    }
+}
+
+/* Styles pour l'icône de mosquée */
+.mosque-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+}
+
+.mosque-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Styles pour l'icône de localisation de l'utilisateur */
+.user-location-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+}
+
+.user-location-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Sur mobile, faire l'icône utilisateur un peu plus grande */
+.mobile-device .user-location-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.mobile-device .user-location-icon svg {
+    width: 28px;
+    height: 28px;
+}
+
+/* Styles spécifiques pour les appareils mobiles */
+.mobile-device #map {
+    touch-action: pan-y pinch-zoom;
+}
+
+.mobile-device .mosque-btn, 
+.mobile-device .mosque-directions, 
+.mobile-device #refresh-btn {
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+}
+
+/* Styles spécifiques pour iOS */
+.ios-device .mosque-btn, 
+.ios-device .mosque-directions, 
+.ios-device #refresh-btn {
+    -webkit-appearance: none;
+}
+
+/* Styles pour mode portrait/paysage */
+.portrait #map {
+    height: 40vh;
+}
+
+.landscape #map {
+    height: 60vh;
+}
+
+/* Styles pour les petits écrans */
+.small-screen .mosque-name {
+    font-size: 0.8rem;
+}
+
+.small-screen .mosque-distance {
+    font-size: 0.7rem;
+}
+
+/* Styles pour la boussole et le bouton de localisation */
+.map-compass {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    padding: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    transition: all 0.3s ease;
+}
+
+.map-compass:hover {
+    transform: rotate(15deg);
+    background-color: white;
+}
+
+.locate-button {
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    padding: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.locate-button:hover {
+    background-color: white;
+    transform: scale(1.1);
+}
+
+.locate-button:active {
+    transform: scale(0.95);
+}
+
+/* Personnalisation des contrôles Leaflet */
+.leaflet-control-attribution {
+    font-size: 10px;
+    background-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.leaflet-control-zoom {
+    border: none !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important;
+}
+
+.leaflet-control-zoom a {
+    background-color: white !important;
+    color: #7c3f00 !important;
+    width: 36px !important;
+    height: 36px !important;
+    line-height: 36px !important;
+    font-weight: bold !important;
+}
+
+.leaflet-control-zoom a:hover {
+    background-color: #f0f0f0 !important;
+    color: #5e3000 !important;
+}
+
+.leaflet-control-scale {
+    margin-bottom: 15px !important;
+    margin-left: 15px !important;
+}
+
+.leaflet-control-scale-line {
+    border-color: #7c3f00 !important;
+    color: #7c3f00 !important;
+    font-weight: bold !important;
+    background-color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 10px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid #7c3f00 !important;
+    padding: 5px !important;
+}
+
+.leaflet-popup-content {
+    margin: 10px 14px !important;
+}
+
+.leaflet-popup-tip {
+    background-color: #7c3f00 !important;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2) !important;
+}

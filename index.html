@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#7c3f00">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Mosquées">
+    <meta name="description" content="Trouvez les mosquées à proximité de votre position actuelle">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <title>Mosquées Proximité</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <header>
+        <h1>Mosquées à proximité</h1>
+    </header>
+
+    <div class="container">
+        <div class="status-container">
+            <div id="status">Chargement de votre position...</div>
+            <button id="refresh-btn" onclick="refreshLocation()">Actualiser la position</button>
+        </div>
+        <div id="map"></div>
+        <div id="mosque-list">
+            <h2>Mosquées trouvées</h2>
+            <ul id="mosques"></ul>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="enhanced-popups.js"></script>
+    <script src="mobile-detector.js" defer></script>
+    <script src="app.js"></script>
+    <script src="pwa.js" defer></script>
+    
+    <script>
+        // Enregistrement du Service Worker pour la PWA
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(reg => console.log('Service Worker enregistré', reg))
+                .catch(err => console.error('Erreur Service Worker:', err));
+        }
+    </script>
+</body>
+</html>

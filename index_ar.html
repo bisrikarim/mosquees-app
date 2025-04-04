@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#7c3f00">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="المساجد">
+    <meta name="description" content="ابحث عن المساجد القريبة من موقعك الحالي">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>المساجد القريبة</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="rtl-style.css">
+    <link rel="manifest" href="manifest_ar.json">
+</head>
+<body>
+    <header>
+        <h1>المساجد القريبة</h1>
+    </header>
+
+    <div class="container">
+        <div class="status-container">
+            <div id="status">جاري تحميل موقعك...</div>
+            <button id="refresh-btn" onclick="refreshLocation()">تحديث الموقع</button>
+        </div>
+        <div id="map"></div>
+        <div id="mosque-list">
+            <h2>المساجد التي تم العثور عليها</h2>
+            <ul id="mosques"></ul>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="enhanced-popups_ar.js"></script>
+    <script src="mobile-detector.js" defer></script>
+    <script src="app_ar.js"></script>
+    <script src="pwa.js" defer></script>
+    
+    <script>
+        // تسجيل Service Worker للتطبيق
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(reg => console.log('تم تسجيل Service Worker', reg))
+                .catch(err => console.error('خطأ في Service Worker:', err));
+        }
+    </script>
+</body>
+</html>

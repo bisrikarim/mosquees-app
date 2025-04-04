@@ -1,0 +1,89 @@
+/* Styles spécifiques pour la direction RTL (droite à gauche) */
+body {
+    direction: rtl;
+    text-align: right;
+}
+
+.mosque-info {
+    flex-direction: row-reverse;
+}
+
+.mosque-icon-small {
+    margin-right: 0;
+    margin-left: 0.5rem;
+}
+
+.mosque-actions {
+    flex-direction: row-reverse;
+}
+
+/* Inversion de la position de la boussole et du bouton de localisation */
+.map-compass {
+    left: 10px;
+    right: auto;
+}
+
+.locate-button {
+    left: 10px;
+    right: auto;
+    top: 60px;
+}
+
+/* Ajustement des contrôles Leaflet */
+.leaflet-control-zoom {
+    left: 10px !important;
+    right: auto !important;
+}
+
+.leaflet-control-scale {
+    margin-right: 15px !important;
+    margin-left: auto !important;
+}
+
+/* Modifications pour les éléments du statut */
+#status {
+    margin-right: 0;
+    margin-left: 1rem;
+}
+
+/* Ajustement des popups */
+.leaflet-popup-content {
+    text-align: right;
+}
+
+/* Styles pour les médias queries */
+@media (max-width: 768px) {
+    #status {
+        margin-left: 0;
+    }
+}
+
+/* Font adjustments for Arabic */
+* {
+    font-family: 'Cairo', sans-serif;
+}
+
+/* Fix for some Arabic specific elements */
+.mosque-btn, .mosque-directions, #refresh-btn {
+    font-family: 'Cairo', sans-serif;
+}
+
+/* Header text adjustment */
+header h1 {
+    font-weight: 700;
+}
+
+/* Button text weight */
+button, .mosque-btn, .mosque-directions {
+    font-weight: 600;
+}
+
+/* Improved list item styling with Cairo font */
+.mosque-name {
+    font-weight: 600;
+}
+
+/* Status text enhancement */
+#status {
+    font-weight: 400;
+}
